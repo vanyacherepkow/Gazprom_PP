@@ -26,5 +26,7 @@ namespace Gazprom_Inform
         public static int ID_Access;
         public static string BackColor;
         public static string ForeColor;
+        public static DataTable SpisSotr;
+        public static string UserDolj;
     }
 }

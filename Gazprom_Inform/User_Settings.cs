@@ -21,7 +21,7 @@ namespace Gazprom_Inform
         }
         public void Select_Color_get()
         {
-            RegistryKey color = Registry.CurrentUser;
+            RegistryKey color = Registry.CurrentConfig;
             RegistryKey back = color.CreateSubKey("Gazprom");
             Program.BackColor = back.GetValue("BackColor").ToString();
             Program.ForeColor = back.GetValue("ForeColor").ToString();

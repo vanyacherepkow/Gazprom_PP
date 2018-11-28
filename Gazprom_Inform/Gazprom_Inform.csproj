@@ -54,6 +54,24 @@
     <Compile Include="Autorization.Designer.cs">
       <DependentUpon>Autorization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Exp_Dok.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Exp_Dok.Designer.cs">
+      <DependentUpon>Exp_Dok.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Imp_Dok.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Imp_Dok.Designer.cs">
+      <DependentUpon>Imp_Dok.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Nazh_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Nazh_Form.Designer.cs">
+      <DependentUpon>Nazh_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Podkl_bazi.cs" />
     <Compile Include="Rabota_s_bazoi.cs" />
     <Compile Include="Sotrudniki.cs">
@@ -80,6 +98,12 @@
     <EmbeddedResource Include="Autorization.resx">
       <DependentUpon>Autorization.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Exp_Dok.resx">
+      <DependentUpon>Exp_Dok.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Imp_Dok.resx">
+      <DependentUpon>Imp_Dok.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sotrudniki.resx">
       <DependentUpon>Sotrudniki.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,6 +122,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

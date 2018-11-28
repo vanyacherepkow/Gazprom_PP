@@ -21,9 +21,10 @@ namespace Gazprom_Inform
 
         private void Main_Menu_Load(object sender, EventArgs e)
         {
-            
             _RSB.viv_im_sotr();
             пользовательToolStripMenuItem.Text= "Пользователь - " + Program.NameSotr;
+            _US.Select_Color_get();
+            color_setting();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -49,26 +50,18 @@ namespace Gazprom_Inform
 
         private void тёмнаяТемаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int i;
             _US.Select_Color_set_dark();
-            statusStrip1.BackColor = Color.FromName(Program.BackColor);
-            this.BackColor = Color.FromName(Program.BackColor);
-            Button[] Buttons = new Button[] { button1, button2, button3 };
-            for (i = 0; i < Buttons.Length; i++)
-            {
-                Buttons[i].BackColor = Color.FromName(Program.BackColor);
-                Buttons[i].ForeColor = Color.FromName(Program.ForeColor);
-            }
-            menuStrip1.BackColor = Color.FromName(Program.BackColor);
-            menuStrip1.ForeColor = Color.FromName(Program.ForeColor);
-            statusStrip1.BackColor = Color.FromName(Program.BackColor);
-            statusStrip1.ForeColor = Color.FromName(Program.ForeColor);
+            color_setting();
         }
 
         private void светлаяТемаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int i;
             _US.Select_Color_set_light();
+            color_setting();
+        }
+        public void color_setting()
+        {
+            int i;
             statusStrip1.BackColor = Color.FromName(Program.BackColor);
             this.BackColor = Color.FromName(Program.BackColor);
             Button[] Buttons = new Button[] { button1, button2, button3 };
@@ -81,6 +74,37 @@ namespace Gazprom_Inform
             menuStrip1.ForeColor = Color.FromName(Program.ForeColor);
             statusStrip1.BackColor = Color.FromName(Program.BackColor);
             statusStrip1.ForeColor = Color.FromName(Program.ForeColor);
+            пользовательToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
+            пользовательToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
+            сменитьТемуToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
+            сменитьТемуToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
+            сменитьПользователяToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
+            сменитьПользователяToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
+            тёмнаяТемаToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
+            тёмнаяТемаToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
+            светлаяТемаToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
+            светлаяТемаToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Imp_Dok Form = new Imp_Dok();
+            Form.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Exp_Dok Form = new Exp_Dok();
+            Form.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Nazh_Form Form = new Nazh_Form();
+            Form.Show();
         }
     }
 }

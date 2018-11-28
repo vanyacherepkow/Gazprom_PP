@@ -15,7 +15,7 @@ using MaterialSkin.Controls;
 namespace Gazprom_Inform
 {
     public partial class Sotrudniki : Form
-    {
+    { 
         Rabota_s_bazoi _RSB = new Rabota_s_bazoi();
         Podkl_bazi _PB = new Podkl_bazi();
         User_Settings _US = new User_Settings();
@@ -30,6 +30,7 @@ namespace Gazprom_Inform
         }
         public void sotrudniki_load()
         {
+            _US.Select_Color_get();
             toolStripStatusLabel1.Text = Convert.ToString(DateTime.Now);
             try
             {
@@ -54,31 +55,23 @@ namespace Gazprom_Inform
             {
                 _PB.Set_Connection();
                 _PB.Connection.Open();
-                _RSB.viv_im_sotr();
-                dataGridView1.DataSource = Program.NameSotr;
+                _RSB.viv_sotr();
+                dataGridView1.DataSource = Program.SpisSotr;
                 groupBox1.Visible = true;
                 _PB.Connection.Close();
+
             }
             else
             {
                 dataGridView1.Columns[4].Visible = false;
                 dataGridView1.Columns[5].Visible = false;
             }
-            try
-            {
-                _US.Select_Color_get();
-                statusStrip1.BackColor = Color.FromName(Program.BackColor);
-                this.BackColor = Color.FromName(Program.BackColor);
-            }
-            catch
-            {
-
-            }
         }
 
         private void Sotrudniki_Load(object sender, EventArgs e)
         {
             sotrudniki_load();
+            color_setting();
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -199,6 +192,79 @@ namespace Gazprom_Inform
             _US.Select_Color_set_light();
             statusStrip1.BackColor = Color.FromName(Program.BackColor);
             this.BackColor = Color.FromName(Program.BackColor);
+        }
+
+        private void вернутьсяВГлавноеМенюToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Main_Menu Menu = new Main_Menu();
+            Menu.Show();
+        }
+        public void color_setting()
+        {
+            int i;
+            statusStrip1.BackColor = Color.FromName(Program.BackColor);
+            this.BackColor = Color.FromName(Program.BackColor);
+            Button[] Buttons = new Button[] { button1, button2, button3};
+            for (i = 0; i < Buttons.Length; i++)
+            {
+                Buttons[i].BackColor = Color.FromName(Program.BackColor);
+                Buttons[i].ForeColor = Color.FromName(Program.ForeColor);
+            }
+            menuStrip1.BackColor = Color.FromName(Program.BackColor);
+            menuStrip1.ForeColor = Color.FromName(Program.ForeColor);
+            statusStrip1.BackColor = Color.FromName(Program.BackColor);
+            statusStrip1.ForeColor = Color.FromName(Program.ForeColor);
+            пользовательToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
+            пользовательToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
+            вернутьсяВГлавноеМенюToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
+            вернутьсяВГлавноеМенюToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
+            сменитьТемуToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
+            сменитьТемуToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
+            тёмнаяТемаToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
+            тёмнаяТемаToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
+            светлаяТемаToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
+            светлаяТемаToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
+            groupBox1.BackColor = Color.FromName(Program.BackColor);
+            groupBox1.ForeColor = Color.FromName(Program.ForeColor);
+            Label[] Labels = new Label[] { label1, label2, label3, label4, label5, label6, label7, };
+            for (i = 0; i < Labels.Length; i++)
+            {
+                Labels[i].BackColor = Color.FromName(Program.BackColor);
+                Labels[i].ForeColor = Color.FromName(Program.ForeColor);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //_PB.Set_Connection();
+            //_PB.Connection.Open();
+            //SqlCommand add_dolj = new SqlCommand("Select nazv_dolj from dolj where nazv_dolj='", _PB.Connection);
+            //add_dolj.ExecuteScalar().ToString();
+            //if (add_dolj.ToString()=textBox7.Text)
+            //    {
+            //    MessageBox.Show("Данная должность уже присутствует");
+            //}
+            //else
+            //{
+            //    SqlCommand Dolj_add = new SqlCommand("insert into [dbo].[dolj]([nazv_dolj]) values (@Nazv_Dolj)", _PB.Connection);
+            //    Dolj_add.Parameters.AddWithValue("Nazv_Dolj", textBox7.Text);
+            //    Dolj_add.ExecuteNonQuery();
+            //    _PB.Connection.Close();
+            //    MessageBox.Show("Должность добавлена");
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand Dolj_add = new SqlCommand("insert into [dbo].[dolj]([nazv_dolj]) values (@Nazv_Dolj)", _PB.Connection);
+            Dolj_add.Parameters.AddWithValue("Nazv_Dolj", textBox7.Text);
+            Dolj_add.ExecuteNonQuery();
+            _PB.Connection.Close();
+            MessageBox.Show("Должность добавлена");
+                //}
+            }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

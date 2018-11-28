@@ -32,7 +32,7 @@ namespace Gazprom_Inform
             _PB.Connection.Close();
         }
 
-       /* public void viv_sotr()
+        public void viv_sotr()
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
@@ -40,9 +40,9 @@ namespace Gazprom_Inform
             SqlDataReader TableReader = NameSotrSQL.ExecuteReader();
             DataTable Table = new DataTable();
             Table.Load(TableReader);
-            Program.NameSotr = Table;
+            Program.SpisSotr = Table;
             _PB.Connection.Close();
-        }*/
+        }
         public void accss_for_sotr()
         {
             _PB.Set_Connection();

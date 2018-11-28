@@ -46,7 +46,7 @@ namespace Gazprom_Inform
                 }
                 else
                 {
-                    MessageBox.Show("Пользователь с логином " + textBox1.Text + " не найден в системе.\nПовторите попытку ввода.", "Ошибка авторизации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Пользователь с такими данными не найден в системе.\nПовторите попытку ввода.", "Ошибка авторизации", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
