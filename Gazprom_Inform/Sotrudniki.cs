@@ -11,11 +11,15 @@ using System.Data.SqlClient;
 using System.Data.Sql;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using Crypt;
 
 namespace Gazprom_Inform
 {
     public partial class Sotrudniki : Form
-    { 
+    {
+        int id_Sotr;
+        int Access_edit;
+        public Crypt_Class Crpt = new Crypt_Class();
         Rabota_s_bazoi _RSB = new Rabota_s_bazoi();
         Podkl_bazi _PB = new Podkl_bazi();
         User_Settings _US = new User_Settings();
@@ -57,14 +61,17 @@ namespace Gazprom_Inform
                 _PB.Connection.Open();
                 _RSB.viv_sotr();
                 dataGridView1.DataSource = Program.SpisSotr;
+                Crpt.de_code_text(dataGridView1.Columns[5].ToString());
+                Crpt.de_code_text(dataGridView1.Columns[6].ToString());
                 groupBox1.Visible = true;
                 _PB.Connection.Close();
 
             }
             else
             {
-                dataGridView1.Columns[4].Visible = false;
+                dataGridView1.Columns[0].Visible = false;
                 dataGridView1.Columns[5].Visible = false;
+                dataGridView1.Columns[6].Visible = false;
             }
         }
 
@@ -123,7 +130,7 @@ namespace Gazprom_Inform
             checkBox4.Checked = false;
             checkBox5.Checked = false;
             _PB.Connection.Close();
-            MessageBox.Show("Права досутпа для пользователя созданы, номер доступ - "+(Program.ID_Access+1).ToString());
+            MessageBox.Show("Права досутпа для пользователя созданы, номер доступа - "+(Program.ID_Access+1).ToString());
         }
 
         public void registration(string Fam_Sotr, string Im_Sotr, string Otch_Sotr, string Login_Sotr, string Password_Sotr, int Dolj_id, int Access_ID)
@@ -150,34 +157,36 @@ namespace Gazprom_Inform
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            if (textBox5.Text == textBox6.Text)
+            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == "" )
             {
-                _PB.Set_Connection();
-                _PB.Connection.Open();
-                SqlCommand reg_add = new SqlCommand("Sotr_add", _PB.Connection);
-                reg_add.CommandType = CommandType.StoredProcedure;
-                reg_add.Parameters.AddWithValue("@Fam_Sotr", textBox1.Text);
-                reg_add.Parameters.AddWithValue("@Im_Sotr", textBox2.Text);
-                reg_add.Parameters.AddWithValue("@Otch_Sotr", textBox3.Text);
-                reg_add.Parameters.AddWithValue("@Login_Sotr", textBox4.Text);
-                reg_add.Parameters.AddWithValue("@Password", textBox5.Text);
-                reg_add.Parameters.AddWithValue("@Dolj_ID", (comboBox1.SelectedIndex+1));
-                reg_add.Parameters.AddWithValue("@Access_id", (Program.ID_Access+1));
-                reg_add.ExecuteNonQuery();
-                _PB.Connection.Close();
-                Program.ID_Access = 0;
-                MessageBox.Show("Пользователь успешно добавлен");
-                sotrudniki_load();
+                MessageBox.Show("Заполните все поля");
             }
             else
             {
-                MessageBox.Show("Введённые пароли не совпадают");
+                if (textBox5.Text == textBox6.Text)
+                {
+                    _PB.Set_Connection();
+                    _PB.Connection.Open();
+                    SqlCommand reg_add = new SqlCommand("Sotr_add", _PB.Connection);
+                    reg_add.CommandType = CommandType.StoredProcedure;
+                    reg_add.Parameters.AddWithValue("@Fam_Sotr", textBox1.Text);
+                    reg_add.Parameters.AddWithValue("@Im_Sotr", textBox2.Text);
+                    reg_add.Parameters.AddWithValue("@Otch_Sotr", textBox3.Text);
+                    reg_add.Parameters.AddWithValue("@Login_Sotr", Crpt.code_text(textBox4.Text));
+                    reg_add.Parameters.AddWithValue("@Password", Crpt.code_text(textBox5.Text));
+                    reg_add.Parameters.AddWithValue("@Dolj_ID", (comboBox1.SelectedIndex + 1));
+                    reg_add.Parameters.AddWithValue("@Access_id", (Program.ID_Access + 1));
+                    reg_add.ExecuteNonQuery();
+                    _PB.Connection.Close();
+                    Program.ID_Access = 0;
+                    MessageBox.Show("Пользователь успешно добавлен");
+                    sotrudniki_load();
+                }
+                else
+                {
+                    MessageBox.Show("Введённые пароли не совпадают");
+                }
             }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
 
         private void тёмнаяТемаToolStripMenuItem_Click(object sender, EventArgs e)
@@ -205,7 +214,7 @@ namespace Gazprom_Inform
             int i;
             statusStrip1.BackColor = Color.FromName(Program.BackColor);
             this.BackColor = Color.FromName(Program.BackColor);
-            Button[] Buttons = new Button[] { button1, button2, button3};
+            Button[] Buttons = new Button[] { button1, button2, button3,button4};
             for (i = 0; i < Buttons.Length; i++)
             {
                 Buttons[i].BackColor = Color.FromName(Program.BackColor);
@@ -264,7 +273,40 @@ namespace Gazprom_Inform
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (textBox5.Text == textBox6.Text)
+            {
+                _PB.Set_Connection();
+                _PB.Connection.Open();
+                SqlCommand sotr_edit = new SqlCommand("update Sotr set Fam_Sotr = @Fam_Sotr, Im_Sotr = @Im_Sotr,Otch_Sotr = @Otch_Sotr,Login_Sotr = @Login_Sotr,Password_sotr = @Password_sotr,Dolj_ID = @Dolj_ID, Access_ID=@Access_id where ID_Sotr = @ID_Sotr", _PB.Connection);
+                sotr_edit.Parameters.AddWithValue("@Fam_Sotr", textBox1.Text);
+                sotr_edit.Parameters.AddWithValue("@Im_Sotr", textBox2.Text);
+                sotr_edit.Parameters.AddWithValue("@Otch_Sotr", textBox3.Text);
+                sotr_edit.Parameters.AddWithValue("@Login_Sotr", Crpt.code_text(textBox4.Text));
+                sotr_edit.Parameters.AddWithValue("@Password_sotr", Crpt.code_text(textBox5.Text));
+                sotr_edit.Parameters.AddWithValue("@Dolj_ID", (comboBox1.SelectedIndex + 1));
+                sotr_edit.Parameters.AddWithValue("@Access_id", (Access_edit));
+                sotr_edit.Parameters.AddWithValue("@id_sotr", id_Sotr);
+                sotr_edit.ExecuteNonQuery();
+                _PB.Connection.Close();
+                MessageBox.Show("Данные успешно изменены");
+                sotrudniki_load();
+            }
+            else
+            {
+                MessageBox.Show("Введённые пароли не совпадают");
+            }
+        }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            id_Sotr = Convert.ToInt32(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            textBox1.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            textBox2.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            textBox3.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            textBox4.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            textBox5.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            comboBox1.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
+            Access_edit = Convert.ToInt32(dataGridView1.CurrentRow.Cells[7].Value.ToString());
         }
     }
 }

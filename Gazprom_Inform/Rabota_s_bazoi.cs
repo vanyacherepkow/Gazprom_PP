@@ -36,7 +36,7 @@ namespace Gazprom_Inform
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
-            SqlCommand NameSotrSQL = new SqlCommand("select[dbo].[Sotr].[Im_Sotr]as 'Имя сотрудника', [dbo].[Sotr].[Otch_Sotr] as 'Отчество сотрудника', [dbo].[Sotr].[Fam_Sotr] as 'Фамилия сотрудника',[dbo].[Dolj].[Nazv_Dolj] as 'Название должности', [dbo].[Sotr].[Login_Sotr] as 'Логин сотрудника',[dbo].[Sotr].[Password_Sotr] as 'Пароль сотрудника' from[dbo].[Sotr] inner join[dbo].[Dolj] on[dbo].[Dolj].[id_Dolj]=[dbo].[Sotr].[Dolj_id] ",_PB.Connection);
+            SqlCommand NameSotrSQL = new SqlCommand("select [dbo].[Sotr].[ID_Sotr], [dbo].[Sotr].[Im_Sotr]as 'Имя сотрудника', [dbo].[Sotr].[Otch_Sotr] as 'Отчество сотрудника', [dbo].[Sotr].[Fam_Sotr] as 'Фамилия сотрудника', [dbo].[Sotr].[Login_Sotr] as 'Логин сотрудника',[dbo].[Sotr].[Password_Sotr] as 'Пароль сотрудника',[dbo].[Dolj].[Nazv_Dolj] as 'Название должности',[dbo].[Sotr].[Access_id] as 'Номер доступа' from[dbo].[Sotr] inner join[dbo].[Dolj] on[dbo].[Dolj].[id_Dolj]=[dbo].[Sotr].[Dolj_id] inner join [dbo].[Access_Level] on [dbo].[Access_Level].[ID_access]=[dbo].[Sotr].[Access_id] ", _PB.Connection);
             SqlDataReader TableReader = NameSotrSQL.ExecuteReader();
             DataTable Table = new DataTable();
             Table.Load(TableReader);
@@ -49,6 +49,17 @@ namespace Gazprom_Inform
             _PB.Connection.Open();
             SqlCommand AccessAddSQL = new SqlCommand("select top 1 ID_access from Access_level  order by ID_access desc", _PB.Connection);
             Program.ID_Access = Convert.ToInt32(AccessAddSQL.ExecuteScalar().ToString());
+            _PB.Connection.Close();
+        }
+        public void Ish_dok_viv()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand ish_dok = new SqlCommand("select ID_ish_dok, Sotr_id_v_ish_dok as 'Сотрудник, котоырй отвечает за документ', Year_dok_do_obr as 'Год документа', Date_zagr_dok as 'Дата загрузки документа', Ish_file_way as 'Путь документа'  from Ish_dok", _PB.Connection);
+            SqlDataReader TableReader = ish_dok.ExecuteReader();
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.IshDok = Table;
             _PB.Connection.Close();
         }
     }

@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClassLibrary3">
+      <HintPath>.\ClassLibrary3.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialSkin, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PersianMaterialSkin.2.0.3\lib\net45\MaterialSkin.dll</HintPath>
     </Reference>
@@ -103,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Imp_Dok.resx">
       <DependentUpon>Imp_Dok.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nazh_Form.resx">
+      <DependentUpon>Nazh_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sotrudniki.resx">
       <DependentUpon>Sotrudniki.cs</DependentUpon>

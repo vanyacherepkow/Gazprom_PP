@@ -28,5 +28,6 @@ namespace Gazprom_Inform
         public static string ForeColor;
         public static DataTable SpisSotr;
         public static string UserDolj;
+        public static DataTable IshDok;
     }
 }

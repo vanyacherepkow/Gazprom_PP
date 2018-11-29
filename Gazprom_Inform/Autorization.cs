@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using Crypt;
 
 namespace Gazprom_Inform
 {
     public partial class Autorization : Form
     {
-         Podkl_bazi _PB = new Podkl_bazi();
+        public Crypt_Class Crpt = new Crypt_Class();
+        Podkl_bazi _PB = new Podkl_bazi();
         public string Admin_access = "select[dbo].[Access_level].[Admin_access] from[dbo].[Access_level] inner join [dbo].[Sotr] on[dbo].[Sotr].[access_id]=[dbo].[Access_level].[Id_access] where [Sotr].[id_Sotr]=";
 
         public Autorization()
@@ -28,8 +30,7 @@ namespace Gazprom_Inform
             {
                 
                 _PB.Set_Connection();
-                SqlCommand get_login = new SqlCommand("select id_Sotr from Sotr where Login_Sotr = '" + textBox1.Text + "' and " +
-                "Password_Sotr = '" + textBox2.Text + "'", _PB.Connection);
+                SqlCommand get_login =  new SqlCommand("select id_Sotr from Sotr where Login_Sotr ='" + Crpt.code_text(textBox1.Text) + "'and Password_Sotr = '" + Crpt.code_text(textBox2.Text) + "'", _PB.Connection);
                 _PB.Connection.Open();
                 SqlDataReader read_login = get_login.ExecuteReader();
                 if (read_login.HasRows == true)
@@ -59,6 +60,18 @@ namespace Gazprom_Inform
              _PB.Set_Connection();
              auto(textBox1.Text,textBox2.Text);
              _PB.Connection.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //string Crypt;
+            _PB.Set_Connection();
+            SqlCommand Crypt = new SqlCommand("select "+Crpt.de_code_text("Login_Sotr")+" from Sotr where ID_Sotr = 8", _PB.Connection);
+           _PB.Connection.Open();
+            SqlDataReader read_login = Crypt.ExecuteReader();
+            //Crypt=Crpt.ExecuteScalar().ToString();
+            _PB.Connection.Close();
+            MessageBox.Show(read_login.ToString());
         }
     }   
     }
