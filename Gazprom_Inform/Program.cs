@@ -29,5 +29,6 @@ namespace Gazprom_Inform
         public static DataTable SpisSotr;
         public static string UserDolj;
         public static DataTable IshDok;
+        public static DataTable GotDok;
     }
 }

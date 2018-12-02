@@ -61,8 +61,8 @@ namespace Gazprom_Inform
                 _PB.Connection.Open();
                 _RSB.viv_sotr();
                 dataGridView1.DataSource = Program.SpisSotr;
-                Crpt.de_code_text(dataGridView1.Columns[5].ToString());
-                Crpt.de_code_text(dataGridView1.Columns[6].ToString());
+                //Crpt.de_code_text(dataGridView1.Columns[5]..ToString());
+                //Crpt.de_code_text(dataGridView1.Columns[6].ToString());
                 groupBox1.Visible = true;
                 _PB.Connection.Close();
 

@@ -1,6 +1,6 @@
 ﻿namespace Gazprom_Inform
 {
-    partial class Nazh_Form
+    partial class Otchet
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // Nazh_Form
+            // Otchet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(810, 434);
-            this.Name = "Nazh_Form";
-            this.Text = "Форма начальника отдела";
+            this.Name = "Otchet";
+            this.Text = "Форма формирования отчёта";
             this.ResumeLayout(false);
 
         }

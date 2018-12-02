@@ -153,5 +153,29 @@ namespace Gazprom_Inform
             };
             Invoke(Act);
         }
+        public void color_setting()
+        {
+            int i;
+            statusStrip1.BackColor = Color.FromName(Program.BackColor);
+            this.BackColor = Color.FromName(Program.BackColor);
+            Button[] Buttons = new Button[] { button1, button2 };
+            for (i = 0; i < Buttons.Length; i++)
+            {
+                Buttons[i].BackColor = Color.FromName(Program.BackColor);
+                Buttons[i].ForeColor = Color.FromName(Program.ForeColor);
+            }
+            statusStrip1.BackColor = Color.FromName(Program.BackColor);
+            statusStrip1.ForeColor = Color.FromName(Program.ForeColor);
+            comboBox1.BackColor = Color.FromName(Program.BackColor);
+            comboBox1.ForeColor = Color.FromName(Program.ForeColor);
+            comboBox2.BackColor = Color.FromName(Program.BackColor);
+            comboBox2.ForeColor = Color.FromName(Program.ForeColor);
+            Label[] Labels = new Label[] { label1, label2, label3, label4, };
+            for (i = 0; i < Labels.Length; i++)
+            {
+                Labels[i].BackColor = Color.FromName(Program.BackColor);
+                Labels[i].ForeColor = Color.FromName(Program.ForeColor);
+            }
+        }
     }
 }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Gazprom_Inform
 {
-    public partial class Nazh_Form : Form
+    public partial class Otchet : Form
     {
-        public Nazh_Form()
+        public Otchet()
         {
             InitializeComponent();
         }

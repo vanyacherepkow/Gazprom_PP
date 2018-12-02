@@ -27,7 +27,7 @@ namespace Gazprom_Inform
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
-            SqlCommand NameSotrSQL= new SqlCommand ("select[dbo].[Sotr].[Im_Sotr] + ' ' + [dbo].[Sotr].[Otch_Sotr] from[dbo].[Sotr] where[Sotr].[ID_Sotr] = " + Program.login, _PB.Connection);
+            SqlCommand NameSotrSQL= new SqlCommand ("select concat(Fam_Sotr,' ', Im_Sotr) from[dbo].[Sotr] where[Sotr].[ID_Sotr] = " + Program.login, _PB.Connection);
             Program.NameSotr = NameSotrSQL.ExecuteScalar().ToString();
             _PB.Connection.Close();
         }
@@ -55,11 +55,23 @@ namespace Gazprom_Inform
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
-            SqlCommand ish_dok = new SqlCommand("select ID_ish_dok, Sotr_id_v_ish_dok as 'Сотрудник, котоырй отвечает за документ', Year_dok_do_obr as 'Год документа', Date_zagr_dok as 'Дата загрузки документа', Ish_file_way as 'Путь документа'  from Ish_dok", _PB.Connection);
+            SqlCommand ish_dok = new SqlCommand("select ID_ish_dok, concat(Fam_Sotr,' ',Im_Sotr) as 'Сотрудник, котоырй отвечает за документ', Year_dok_do_obr as 'Год документа', Date_zagr_dok as 'Дата загрузки документа', Ish_file_way as 'Путь документа'  from Ish_dok inner join Sotr on Sotr_id_v_ish_dok=ID_Sotr", _PB.Connection);
             SqlDataReader TableReader = ish_dok.ExecuteReader();
             DataTable Table = new DataTable();
             Table.Load(TableReader);
             Program.IshDok = Table;
+            _PB.Connection.Close();
+        }
+
+        public void Got_dok_viv()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand got_dok = new SqlCommand("select  ID_got_dok ,Nazv_got_dok as 'Название документа',concat(Fam_Sotr,' ',Im_Sotr) as 'Фамилия и имя работника',Data_sozdan as 'Дата создание документа',Got_File_way as 'Путь документа'  from sotr inner join Got_dok on [sotr].[ID_Sotr]=Got_dok.Sotr_ID_v_got_dok", _PB.Connection);
+            SqlDataReader TableReader = got_dok.ExecuteReader();
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.GotDok = Table;
             _PB.Connection.Close();
         }
     }

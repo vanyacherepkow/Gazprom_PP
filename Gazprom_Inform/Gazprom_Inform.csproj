@@ -69,11 +69,11 @@
     <Compile Include="Imp_Dok.Designer.cs">
       <DependentUpon>Imp_Dok.cs</DependentUpon>
     </Compile>
-    <Compile Include="Nazh_Form.cs">
+    <Compile Include="Otchet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Nazh_Form.Designer.cs">
-      <DependentUpon>Nazh_Form.cs</DependentUpon>
+    <Compile Include="Otchet.Designer.cs">
+      <DependentUpon>Otchet.cs</DependentUpon>
     </Compile>
     <Compile Include="Podkl_bazi.cs" />
     <Compile Include="Rabota_s_bazoi.cs" />
@@ -107,8 +107,8 @@
     <EmbeddedResource Include="Imp_Dok.resx">
       <DependentUpon>Imp_Dok.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Nazh_Form.resx">
-      <DependentUpon>Nazh_Form.cs</DependentUpon>
+    <EmbeddedResource Include="Otchet.resx">
+      <DependentUpon>Otchet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sotrudniki.resx">
       <DependentUpon>Sotrudniki.cs</DependentUpon>

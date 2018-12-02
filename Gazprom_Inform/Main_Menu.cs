@@ -64,7 +64,7 @@ namespace Gazprom_Inform
             int i;
             statusStrip1.BackColor = Color.FromName(Program.BackColor);
             this.BackColor = Color.FromName(Program.BackColor);
-            Button[] Buttons = new Button[] { button1, button2, button3,button4 };
+            Button[] Buttons = new Button[] { button1, button2, button3, button4 };
             for (i = 0; i < Buttons.Length; i++)
             {
                 Buttons[i].BackColor = Color.FromName(Program.BackColor);
@@ -103,7 +103,7 @@ namespace Gazprom_Inform
         private void button4_Click(object sender, EventArgs e)
         {
             this.Close();
-            Nazh_Form Form = new Nazh_Form();
+            Otchet Form = new Otchet();
             Form.Show();
         }
     }
