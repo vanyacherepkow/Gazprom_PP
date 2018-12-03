@@ -30,5 +30,6 @@ namespace Gazprom_Inform
         public static string UserDolj;
         public static DataTable IshDok;
         public static DataTable GotDok;
+        public static DataTable Otchet;
     }
 }

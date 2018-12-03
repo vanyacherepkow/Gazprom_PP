@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
@@ -46,6 +47,8 @@
             this.выходВМенюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -164,14 +167,16 @@
             // светлаяТемаToolStripMenuItem
             // 
             this.светлаяТемаToolStripMenuItem.Name = "светлаяТемаToolStripMenuItem";
-            this.светлаяТемаToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.светлаяТемаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.светлаяТемаToolStripMenuItem.Text = "Светлая тема";
+            this.светлаяТемаToolStripMenuItem.Click += new System.EventHandler(this.светлаяТемаToolStripMenuItem_Click);
             // 
             // тёмнаяТемаToolStripMenuItem
             // 
             this.тёмнаяТемаToolStripMenuItem.Name = "тёмнаяТемаToolStripMenuItem";
-            this.тёмнаяТемаToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.тёмнаяТемаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.тёмнаяТемаToolStripMenuItem.Text = "Тёмная тема";
+            this.тёмнаяТемаToolStripMenuItem.Click += new System.EventHandler(this.тёмнаяТемаToolStripMenuItem_Click);
             // 
             // выходВМенюToolStripMenuItem
             // 
@@ -196,11 +201,26 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(545, 320);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(231, 23);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "Переход к отчёту";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Exp_Dok
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
@@ -246,5 +266,7 @@
         private System.Windows.Forms.ToolStripMenuItem выходВМенюToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button3;
     }
 }

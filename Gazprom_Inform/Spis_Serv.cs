@@ -15,6 +15,7 @@ namespace Gazprom_Inform
 {
     public partial class Spis_Serv : Form
     {
+        User_Settings _US = new User_Settings();
         private Podkl_bazi _PB;
         private bool proverka_serverov = true;
         private bool poluchit_spis_serverov = true;
@@ -71,6 +72,7 @@ namespace Gazprom_Inform
         }
         private void Servers_Load(object sender, EventArgs e)
         {
+            color_setting();
             proverka_serverov = false;
             poluchit_spis_serverov = false;
             _PB = new Podkl_bazi();
@@ -155,6 +157,7 @@ namespace Gazprom_Inform
         }
         public void color_setting()
         {
+            _US.Select_Color_get();
             int i;
             statusStrip1.BackColor = Color.FromName(Program.BackColor);
             this.BackColor = Color.FromName(Program.BackColor);
@@ -170,7 +173,7 @@ namespace Gazprom_Inform
             comboBox1.ForeColor = Color.FromName(Program.ForeColor);
             comboBox2.BackColor = Color.FromName(Program.BackColor);
             comboBox2.ForeColor = Color.FromName(Program.ForeColor);
-            Label[] Labels = new Label[] { label1, label2, label3, label4, };
+            Label[] Labels = new Label[] { label1,label2,label3,label4 };
             for (i = 0; i < Labels.Length; i++)
             {
                 Labels[i].BackColor = Color.FromName(Program.BackColor);

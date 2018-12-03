@@ -55,7 +55,7 @@ namespace Gazprom_Inform
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
-            SqlCommand ish_dok = new SqlCommand("select ID_ish_dok, concat(Fam_Sotr,' ',Im_Sotr) as 'Сотрудник, котоырй отвечает за документ', Year_dok_do_obr as 'Год документа', Date_zagr_dok as 'Дата загрузки документа', Ish_file_way as 'Путь документа'  from Ish_dok inner join Sotr on Sotr_id_v_ish_dok=ID_Sotr", _PB.Connection);
+            SqlCommand ish_dok = new SqlCommand("select ID_ish_dok, concat(Fam_Sotr,' ',Im_Sotr) as 'Сотрудник, котоырй отвечает за документ', Year_dok_do_obr as 'Год документа', Date_zagr_dok as 'Дата загрузки документа', Ish_file_way as 'Путь документа',Folder_dok_way as 'Папка документов', sotr_id_v_ish_dok   from Ish_dok inner join Sotr on Sotr_id_v_ish_dok=ID_Sotr", _PB.Connection);
             SqlDataReader TableReader = ish_dok.ExecuteReader();
             DataTable Table = new DataTable();
             Table.Load(TableReader);
@@ -72,6 +72,17 @@ namespace Gazprom_Inform
             DataTable Table = new DataTable();
             Table.Load(TableReader);
             Program.GotDok = Table;
+            _PB.Connection.Close();
+        }
+        public void Otch_viv()
+        {
+            _PB.Set_Connection();
+            _PB.Connection.Open();
+            SqlCommand otchet = new SqlCommand("select ID_Otchet as 'Номер документа', Year_dok as 'Год документа', Kol_vo_file as 'Количество страниц', Kol_vo_file as 'Количество файлов', Data_otchet as 'Дата создания отчёта', concat(Fam_Sotr,' ',Im_Sotr)as 'Сотрудник' from Otchet inner join Sotr on ID_Sotr = Sotr_id_v_otch", _PB.Connection);
+            SqlDataReader TableReader = otchet.ExecuteReader();
+            DataTable Table = new DataTable();
+            Table.Load(TableReader);
+            Program.Otchet = Table;
             _PB.Connection.Close();
         }
     }

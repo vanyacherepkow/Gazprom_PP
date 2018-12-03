@@ -47,8 +47,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -87,12 +87,14 @@
             this.светлаяТемаToolStripMenuItem.Name = "светлаяТемаToolStripMenuItem";
             this.светлаяТемаToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.светлаяТемаToolStripMenuItem.Text = "Светлая тема";
+            this.светлаяТемаToolStripMenuItem.Click += new System.EventHandler(this.светлаяТемаToolStripMenuItem_Click);
             // 
             // тёмнаяТемаToolStripMenuItem
             // 
             this.тёмнаяТемаToolStripMenuItem.Name = "тёмнаяТемаToolStripMenuItem";
             this.тёмнаяТемаToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.тёмнаяТемаToolStripMenuItem.Text = "Тёмная тема";
+            this.тёмнаяТемаToolStripMenuItem.Click += new System.EventHandler(this.тёмнаяТемаToolStripMenuItem_Click);
             // 
             // вернутьсяВГлавноеМенюToolStripMenuItem
             // 
@@ -189,13 +191,6 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(557, 198);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(231, 20);
-            this.dateTimePicker1.TabIndex = 20;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(641, 416);
@@ -206,13 +201,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(557, 204);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(230, 20);
+            this.textBox1.TabIndex = 22;
+            // 
             // Imp_Dok
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 473);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
@@ -256,7 +258,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

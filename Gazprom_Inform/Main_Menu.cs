@@ -106,5 +106,11 @@ namespace Gazprom_Inform
             Otchet Form = new Otchet();
             Form.Show();
         }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
     }
 }

@@ -82,7 +82,7 @@ namespace Gazprom_Inform
             тёмнаяТемаToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
             светлаяТемаToolStripMenuItem.BackColor = Color.FromName(Program.BackColor);
             светлаяТемаToolStripMenuItem.ForeColor = Color.FromName(Program.ForeColor);
-            Label[] Labels = new Label[] { label1, label2,  };
+            Label[] Labels = new Label[] { label1, label2, label4 };
             for (i = 0; i < Labels.Length; i++)
             {
                 Labels[i].BackColor = Color.FromName(Program.BackColor);
@@ -102,7 +102,7 @@ namespace Gazprom_Inform
             _PB.Set_Connection();
             _PB.Connection.Open();
             SqlCommand Got_dok_add = new SqlCommand("insert into [dbo].[Got_dok] (sotr_id_v_got_dok, Data_sozdan, Nazv_got_dok, Got_File_way) values (@sotr_id_v_got_dok, @Data_sozdan, @Nazv_got_dok, @Got_File_way)", _PB.Connection);
-            Got_dok_add.Parameters.AddWithValue("@sotr_id_v_got_dok", (comboBox1.SelectedIndex + 1));
+            Got_dok_add.Parameters.AddWithValue("@sotr_id_v_got_dok", (comboBox1.SelectedIndex+1));
             Got_dok_add.Parameters.AddWithValue("@Data_Sozdan", DateTime.Now );
             Got_dok_add.Parameters.AddWithValue("@Nazv_got_dok", textBox1.Text);
             Got_dok_add.Parameters.AddWithValue("@Got_file_way", textBox2.Text);
@@ -113,7 +113,6 @@ namespace Gazprom_Inform
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename;
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -121,6 +120,29 @@ namespace Gazprom_Inform
                 textBox2.Text = dialog.FileName;
                 
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = Convert.ToString(DateTime.Now);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Otchet Form = new Otchet();
+            Form.Show();
+        }
+
+        private void светлаяТемаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _US.Select_Color_set_light();
+            color_setting();
+        }
+
+        private void тёмнаяТемаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

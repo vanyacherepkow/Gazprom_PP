@@ -13,7 +13,8 @@ using Crypt;
 
 namespace Gazprom_Inform
 {
-    public partial class Autorization : Form
+    //MetroFramework.Forms.Metro
+    public partial class Autorization :Form
     {
         public Crypt_Class Crpt = new Crypt_Class();
         Podkl_bazi _PB = new Podkl_bazi();
@@ -63,17 +64,6 @@ namespace Gazprom_Inform
              _PB.Connection.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //string Crypt;
-            _PB.Set_Connection();
-            SqlCommand Crypt = new SqlCommand("select "+Crpt.de_code_text("Login_Sotr")+" from Sotr where ID_Sotr = 8", _PB.Connection);
-           _PB.Connection.Open();
-            SqlDataReader read_login = Crypt.ExecuteReader();
-            //Crypt=Crpt.ExecuteScalar().ToString();
-            _PB.Connection.Close();
-            MessageBox.Show(read_login.ToString());
-        }
 
         private void Autorization_Load(object sender, EventArgs e)
         {
@@ -87,11 +77,17 @@ namespace Gazprom_Inform
             this.BackColor = Color.FromName(Program.BackColor);
             statusStrip1.BackColor = Color.FromName(Program.BackColor);
             statusStrip1.ForeColor = Color.FromName(Program.ForeColor);
-            Button[] Buttons = new Button[] { button1, button2, };
+            Button[] Buttons = new Button[] { button1,  };
             for (i = 0; i < Buttons.Length; i++)
             {
                 Buttons[i].BackColor = Color.FromName(Program.BackColor);
                 Buttons[i].ForeColor = Color.FromName(Program.ForeColor);
+            }
+            TextBox[] Textbox = new TextBox[] { textBox1, textBox2};
+            for (i = 0; i < Textbox.Length; i++)
+            {
+                Textbox[i].BackColor = Color.FromName(Program.BackColor);
+                Textbox[i].ForeColor = Color.FromName(Program.ForeColor);
             }
             Label[] Labels = new Label[] { label1, label2, label3,  };
             for (i = 0; i < Labels.Length; i++)

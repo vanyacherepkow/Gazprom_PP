@@ -48,6 +48,7 @@ namespace Gazprom_Inform
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.DataSource = Program.IshDok;
             dataGridView1.Columns[0].Visible = false;
+            dataGridView1.Columns[6].Visible = false;
             _US.Select_Color_get();
         }
         public void color_setting()
@@ -108,11 +109,12 @@ namespace Gazprom_Inform
                 //foreach ()
                 _PB.Set_Connection();
                 _PB.Connection.Open();
-                SqlCommand Imp_dok_add = new SqlCommand("insert into [dbo].[Ish_Dok] (sotr_id_v_ish_dok, year_dok_do_obr, date_zagr_dok, ish_file_way) values (@sotr_id_v_ish_dok, @year_dok_do_obr, @date_zagr_dok, @ish_file_way)", _PB.Connection);
+                SqlCommand Imp_dok_add = new SqlCommand("insert into [dbo].[Ish_Dok] (sotr_id_v_ish_dok, year_dok_do_obr, date_zagr_dok, ish_file_way, folder_dok_way) values (@sotr_id_v_ish_dok, @year_dok_do_obr, @date_zagr_dok, @ish_file_way,@folder_dok_way)", _PB.Connection);
                 Imp_dok_add.Parameters.AddWithValue("@sotr_id_v_ish_dok", (comboBox1.SelectedIndex + 1));
-                Imp_dok_add.Parameters.AddWithValue("@year_dok_do_obr", dateTimePicker1.Value);
+                //Imp_dok_add.Parameters.AddWithValue("@year_dok_do_obr", dateTimePicker1.Value);
                 Imp_dok_add.Parameters.AddWithValue("@date_zagr_dok", DateTime.Today);
                 Imp_dok_add.Parameters.AddWithValue("@ish_file_way", way);
+                
                 Imp_dok_add.ExecuteNonQuery();
                 _PB.Connection.Close();
                 MessageBox.Show("Документ успешно добавленн в базу");
@@ -132,24 +134,27 @@ namespace Gazprom_Inform
 
         private void button4_Click(object sender, EventArgs e)
         {
+            int q;
             //string path;
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 string[] files;
                 files = Directory.GetFiles(folderBrowserDialog1.SelectedPath);
-                    
-                    foreach (string file in files)
+                string path;
+                path =  folderBrowserDialog1.SelectedPath;
+                foreach (string file in files)
                     {
                         _PB.Set_Connection();
                         _PB.Connection.Open();
-                        SqlCommand Imp_dok_add = new SqlCommand("insert into [dbo].[Ish_Dok] (sotr_id_v_ish_dok, year_dok_do_obr, date_zagr_dok, ish_file_way) values (@sotr_id_v_ish_dok, @year_dok_do_obr, @date_zagr_dok, @ish_file_way)", _PB.Connection);
-                        Imp_dok_add.Parameters.AddWithValue("@sotr_id_v_ish_dok", (comboBox1.SelectedIndex + 1));
-                        Imp_dok_add.Parameters.AddWithValue("@year_dok_do_obr", dateTimePicker1.Value);
+                        SqlCommand Imp_dok_add = new SqlCommand("insert into [dbo].[Ish_Dok] (sotr_id_v_ish_dok, year_dok_do_obr, date_zagr_dok, ish_file_way, folder_dok_way) values (@sotr_id_v_ish_dok, @year_dok_do_obr, @date_zagr_dok, @ish_file_way,@folder_dok_way)", _PB.Connection);
+                        Imp_dok_add.Parameters.AddWithValue("@sotr_id_v_ish_dok", (comboBox1.SelectedIndex+1));
+                        Imp_dok_add.Parameters.AddWithValue("@year_dok_do_obr", textBox1.Text);
                         string fileName = Path.GetFileNameWithoutExtension(file);
                         ListViewItem item = new ListViewItem(fileName);
                         item.Tag = file;
                         way = file;
                         Imp_dok_add.Parameters.AddWithValue("@date_zagr_dok",DateTime.Now );
+                        Imp_dok_add.Parameters.AddWithValue("@folder_dok_way", path.ToString());
                         Imp_dok_add.Parameters.AddWithValue("@ish_file_way", way);
                         Imp_dok_add.ExecuteNonQuery();
                         _PB.Connection.Close();
@@ -162,12 +167,25 @@ namespace Gazprom_Inform
                  //files = Directory.GetFiles(path);
                  //listView1.Items.Add(Directory.GetFiles.(folderBrowserDialog1.,"*docx"));
                  listView1.Items.Add(Directory.GetFiles(@"C:\"));*/
+                path = "";
             }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void светлаяТемаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _US.Select_Color_set_dark();
+            color_setting();
+        }
+
+        private void тёмнаяТемаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _US.Select_Color_set_dark();
+            color_setting();
         }
     }
 }
