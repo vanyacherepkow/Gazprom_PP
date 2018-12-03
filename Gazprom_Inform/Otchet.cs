@@ -120,8 +120,7 @@ namespace Gazprom_Inform
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentRow.Selected)
-            {
+           
                 _PB.Set_Connection();
                 _PB.Connection.Open();
                 SqlCommand sum_dok = new SqlCommand("select count(Folder_dok_way) from [dbo].[Ish_dok] where Folder_dok_way='" + dataGridView1.CurrentRow.Cells[5].Value.ToString() + "'", _PB.Connection);
@@ -132,38 +131,23 @@ namespace Gazprom_Inform
                 year = Convert.ToInt32(year_dok.ExecuteScalar().ToString());
                 MessageBox.Show("Количество страниц - " + files.ToString());
                 _PB.Connection.Close();
-            }
-            else
-            {
-                MessageBox.Show("Значение не выбрано");
-            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentRow.Selected)
-            {
+            
                 _PB.Set_Connection();
                 _PB.Connection.Open();
                 SqlCommand sum_dok = new SqlCommand("select count(Got_File_way) from [dbo].[Got_dok] where Got_File_way='" + dataGridView1.CurrentRow.Cells[4].Value.ToString() + "'", _PB.Connection);
                 paths = Convert.ToInt32(sum_dok.ExecuteScalar().ToString());
                 MessageBox.Show("Количество файлов - " + paths.ToString());
                 _PB.Connection.Close();
-            }
-            else
-            {
-                MessageBox.Show("Значение не выбрано");
-            }
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (year == 0 || paths == 0 || files == 0 || author == 0)
-            {
-                MessageBox.Show("Не все данные заполнены");
-            }
-            else
-            {
                 _PB.Set_Connection();
                 _PB.Connection.Open();
                 SqlCommand otchet_add = new SqlCommand("otchet_add", _PB.Connection);
@@ -183,30 +167,90 @@ namespace Gazprom_Inform
                 year = 0;
                 author = 0;
                 paths = 0;
-            }
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-             Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
-             Microsoft.Office.Interop.Excel.Workbook ExcelWorkBook;
-             Microsoft.Office.Interop.Excel.Worksheet ExcelWorkSheet;
-             //Книга. 
-             ExcelWorkBook = ExcelApp.Workbooks.Add(System.Reflection.Missing.Value);
-            //Таблица. 
-            ExcelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ExcelWorkBook.Worksheets.get_Item(1);
+            /*Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook ExcelWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet ExcelWorkSheet;
+            //Книга. 
+            ExcelWorkBook = ExcelApp.Workbooks.Add(System.Reflection.Missing.Value);
+           //Таблица. 
+           ExcelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ExcelWorkBook.Worksheets.get_Item(1);
 
-             for (int i = 0; i < dataGridView2.Rows.Count; i++)
-             {
-                 for (int j = 0; j < dataGridView2.ColumnCount; j++)
-                 {
-                     ExcelApp.Cells[i + 1, j + 1] = dataGridView2.Rows[i].Cells[j].Value;
-                 }
-             }
-             //Вызываем нашу созданную эксельку. 
-             ExcelApp.Visible = true;
-             ExcelApp.UserControl = true;
-            
+            for (int i = 0; i < dataGridView2.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataGridView2.ColumnCount; j++)
+                {
+                    ExcelApp.Cells[i + 1, j + 1] = dataGridView2.Rows[i].Cells[j].Value;
+                }
+            }
+            //Вызываем нашу созданную эксельку. 
+            ExcelApp.Visible = true;
+            ExcelApp.UserControl = true;*/
+            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application(); // Объявление переменной как эксель 
+            Microsoft.Office.Interop.Excel.Workbook ExcelWorkBook; // Объявление переменной как книга 
+            Microsoft.Office.Interop.Excel.Worksheet ExcelWorkSheet; // Объявление переменной как лист 
+
+            ExcelWorkBook = ExcelApp.Workbooks.Add(System.Reflection.Missing.Value); //Создание книги 
+
+            ExcelWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)ExcelWorkBook.Worksheets.get_Item(1); //Создание лист 
+
+            for (int i = 0; i < dataGridView2.Rows.Count; i++) // Условие пока количество строк в datagridview1 больше чем переменная i то выполняется действие 
+            {
+                for (int j = 0; j < dataGridView2.ColumnCount; j++) // Условие пока количество колонок в datagridview1 больше чем переменная j то выполняется действие 
+                {
+                    ExcelApp.Cells[i + 2, j + 1] = dataGridView2.Rows[i].Cells[j].Value; // Добавление ячеек в документе эксель 
+                }
+            }
+
+            string name = String.Format("{0}.{1}.{2} {3}.{4}", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year, DateTime.Now.Hour, DateTime.Now.Minute); // Объявление переменной даты и времени 
+
+            ExcelApp.Visible = true; // Делаем видимым эксель 
+            ExcelApp.DisplayAlerts = false; // Отключаем уведомление при закрытии 
+
+            ExcelWorkSheet.Name = "Технические неисправности"; // Присвоение значения 
+            ExcelApp.Cells[1, 1] = dataGridView2.Columns[0].HeaderCell.Value; // Присвоение значения 
+            ExcelApp.Cells[1, 2] = dataGridView2.Columns[1].HeaderCell.Value; // Присвоение значения 
+            ExcelApp.Cells[1, 3] = dataGridView2.Columns[2].HeaderCell.Value; ; // Присвоение значения 
+            ExcelApp.Cells[1, 4] = dataGridView2.Columns[3].HeaderCell.Value; // Присвоение значения 
+            ExcelApp.Cells[1, 5] = dataGridView2.Columns[4].HeaderCell.Value; ; // Присвоение значения 
+            ExcelApp.Cells[1, 6] = dataGridView2.Columns[5].HeaderCell.Value; ; // Присвоение значения 
+            ExcelWorkSheet.Rows.AutoFit(); // Выравнивание строк 
+            ExcelWorkSheet.Columns.AutoFit(); // Выравнивание колонок 
+
+            ExcelWorkSheet.Columns.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter; // Выравниваем ячейки по горизонтали 
+            ExcelWorkSheet.Columns.VerticalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter; // Выравниваем ячейки по вертикали 
+
+            for (int i = 0; i < dataGridView2.Rows.Count; i++) // Условие пока количество строк в datagridview1 больше чем переменная i то выполняется действие 
+            {
+                for (int j = 0; j < dataGridView2.ColumnCount; j++) // Условие пока количество колонок в datagridview1 больше чем переменная j то выполняется действие 
+                {
+                    ExcelWorkSheet.Cells[i + 1, j + 1].borders.linestyle = Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous; // создаём границы для таблицы 
+                    ExcelWorkSheet.Cells[i + 1, j + 1].borders.weight = 3d; // выбираем ширину границы 
+                }
+            }
+
+            ExcelApp.UserControl = true;
+
+        // Даём доступ на использование эксель документа 
+
+            ExcelApp.Application.ActiveWorkbook.SaveAs("C:\\Users\\ICher\\Desktop" + name + ".xlsx", // Путь сохранения файла 
+            Type.Missing, // Формат файла 
+            123, // Задаём пароль, который нужно ввести, если снова нужно будет открыть этот документ 
+            123, // Задаём пароль, для разрешения на редактирование документа 
+            true, // Создание сообщения рекомендации по открытию документа в режиме "Только для чтения" 
+            Type.Missing, // Создание backup файла 
+            Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlNoChange, // параметры документа 
+            Type.Missing, // Параметры сохранения документа 
+            Type.Missing, // Добавление книги в лист последних используемых файлов 
+            Type.Missing, // Игнорирование всех языков в excel 
+            Type.Missing, // Игнорирование всех языков в excel 
+            Type.Missing // Параметры языка excel */
+            );
+
         }
 
         private void Otchet_Load(object sender, EventArgs e)

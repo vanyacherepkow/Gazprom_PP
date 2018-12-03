@@ -78,7 +78,7 @@ namespace Gazprom_Inform
         {
             _PB.Set_Connection();
             _PB.Connection.Open();
-            SqlCommand otchet = new SqlCommand("select ID_Otchet as 'Номер документа', Year_dok as 'Год документа', Kol_vo_file as 'Количество страниц', Kol_vo_file as 'Количество файлов', Data_otchet as 'Дата создания отчёта', concat(Fam_Sotr,' ',Im_Sotr)as 'Сотрудник' from Otchet inner join Sotr on ID_Sotr = Sotr_id_v_otch", _PB.Connection);
+            SqlCommand otchet = new SqlCommand("select ID_Otchet as 'Номер документа', Year_dok as 'Год документа', Kol_vo_file as 'Количество страниц', Kol_vo_dok as 'Количество файлов', Data_otchet as 'Дата создания отчёта', concat(Fam_Sotr,' ',Im_Sotr)as 'Сотрудник' from Otchet inner join Sotr on ID_Sotr = Sotr_id_v_otch", _PB.Connection);
             SqlDataReader TableReader = otchet.ExecuteReader();
             DataTable Table = new DataTable();
             Table.Load(TableReader);
